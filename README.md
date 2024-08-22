@@ -23,8 +23,11 @@ The Verilog design provided (APB_Memory) simulates an APB slave that interacts w
 
 ## Outputs:
 •	Pready: Indicates that the slave is ready for a data transfer.
+
 •	Pslverr: Error signal indicating an invalid address access.
+
 •	Prdata: 32-bit data output bus for reading from memory.
+
 •	temp: A temporary register used to hold written data for verification.
 
 ## Memory Array:
@@ -33,35 +36,50 @@ The Verilog design provided (APB_Memory) simulates an APB slave that interacts w
 ## Finite State Machine (FSM):
 The design follows a simple three-state FSM:
 •	Idle: Default state, where the module waits for a Pselx signal.
+
 •	Setup: Prepares the memory for either a read or write operation.
+
 •	Access: Performs the actual data transfer (read or write).
 
 ## Operation:
 •	Reset: When Prst is asserted (low), the module resets to the idle state.
+
 •	Write Operation: If Pwrite and Penable are high, data from Pwdata is written to the memory location specified by Paddr. If Paddr exceeds the bounds of the memory (greater than 31), Pslverr is set.
+
 •	Read Operation: If Pwrite is low and Penable is high, data from the memory location specified by Paddr is read and assigned to Prdata.
 
 # Testbench Analysis (APB_Memory_tb)
 The testbench simulates the APB Memory design by applying various signals and observing the outputs.
+
 ## Key Components:
 •	Clock Generation: A clock signal is generated with a period of 20 units (half-period of 10 units).
+
 •	Tasks:
 o	reset_and_init: Resets the design and initializes the input signals.
+
 o	write_transfer: Writes random data to a random address in the memory.
+
 o	read_transfer: Reads data from a random address in the memory.
+
 o	read_write_transfer: Repeats the write and read operations five times to verify memory functionality.
 
 ## Simulation Flow:
 •	The design is first reset and initialized.
+
 •	A series of write and read operations are performed to verify the correct functionality of the memory.
+
 •	The $strobe system task is used to print messages to the console, displaying the data being written or read along with the corresponding address.
 
 ## Waveform Analysis:
 The output waveform image (Output_Waveform.png) displays the signal transitions during the testbench simulation.
 •	Clock (Pclk): The clock signal toggles regularly, providing the timing reference for the design.
+
 •	Reset (Prst): The reset signal is asserted at the beginning, resetting the design.
+
 •	Signals (Pselx, Penable, Pwrite, Paddr, Pwdata): These signals control the read/write operations, with Pselx selecting the slave, Penable enabling the transfer, and Pwrite indicating the operation type (read or write).
+
 •	Outputs (Pready, Pslverr, Prdata): Pready indicates when the module is ready for the next operation, Pslverr signals an error, and Prdata shows the data being read from memory.
+
 The waveform demonstrates the interaction between these signals, validating the functionality of the APB Memory design. It shows data being written to and read from various memory locations, with the corresponding address and data values displayed.
 
 # Conclusion
