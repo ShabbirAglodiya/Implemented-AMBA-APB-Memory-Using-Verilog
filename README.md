@@ -8,11 +8,17 @@ The Verilog design provided (APB_Memory) simulates an APB slave that interacts w
 
 ## Inputs:
 •	Pclk: Clock signal.
+
 •	Prst: Asynchronous reset signal, active low.
+
 •	Paddr: 5-bit address bus for accessing memory locations.
+
 •	Pselx: Select signal, indicating the slave is being addressed.
+
 •	Penable: Signal to enable data transfer.
+
 •	Pwrite: Signal to determine whether the operation is read (0) or write (1).
+
 •	Pwdata: 32-bit data input bus for writing to memory.
 
 ## Outputs:
